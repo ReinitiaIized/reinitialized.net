@@ -1,0 +1,72 @@
+---
+- hosts: all
+
+  pre_tasks:
+    - name: update cache
+      apt:
+        update_cache: yes
+    - name: upgrade system
+      apt:
+        upgrade: yes
+
+  tasks:
+    - name: remove bloat packages
+      apt:
+        purge: yes
+        pkg:
+          - apport
+          - bcache-tools
+          - btrfs-progs
+          - byobu
+          - cloud-guest-utils
+          - cloud-initramfs*
+          - friendly-recovery
+          - fwupd
+          - landscape-common
+          - lxd-agent-loader
+          - ntfs-3g
+          - plymouth*
+          - popularity-contest
+          - rsync
+          - screen
+          - snapd
+          - sosreport
+          - tmux
+          - ufw
+        state: absent
+    - name: add packages
+      apt:
+        pkg:
+          - firewalld
+          - facter
+        state: present
+      
+    - name: set interface to trusted
+      ansible.posix.firewalld:
+        zone: trusted
+        interface: eth192
+        permanent: yes
+        state: enabled
+
+    - name: remove snapd leftovers
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - /root/snap
+        - /snap
+        - /var/lib/snapd
+        - /var/snap
+    - name: remove tmp files
+      file:
+        path: /tmp/*
+        state: absent
+    - name: remove all logs
+      file:
+        path: /var/log/*
+        state: absent
+    - name: cleanup apt
+      apt:
+        autoremove: yes
+        autoclean: yes
+

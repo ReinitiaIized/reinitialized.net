@@ -1,0 +1,25 @@
+---
+- hosts: "*"
+
+  pre_tasks:
+    - name: update cache
+      dnf:
+        update_cache: yes
+    - name: update system
+      dnf:
+        name: "*"
+        state: latest
+
+  tasks:
+    - name: remove tmp files
+      file:
+        path: /tmp/*
+        state: absent
+    - name: remove all logs
+      file:
+        path: /var/log/*
+        state: absent
+    - name: autoremove leftover packages
+      dnf:
+        autoremove: yes
+  
