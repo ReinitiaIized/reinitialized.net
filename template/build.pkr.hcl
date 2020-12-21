@@ -1,7 +1,7 @@
 # Define variables
 ## vSphere
 variable username {
-    default = "provisioner"
+    default = "provisioner@in.reinitialized.net"
 }
 variable password {}
 ## Template
