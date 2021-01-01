@@ -17,7 +17,6 @@ autoinstall:
 
   packages:
     - open-vm-tools
-    - cloud-init
 
   network:
     ethernets:

@@ -19,7 +19,7 @@
           - btrfs-progs
           - byobu
           - cloud-guest-utils
-          - cloud-initramfs*
+          - cloud-init*
           - friendly-recovery
           - fwupd
           - landscape-common

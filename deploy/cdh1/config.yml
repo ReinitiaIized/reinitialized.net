@@ -1,0 +1,10 @@
+---
+- hosts: all
+
+  pre_tasks:
+    - name: update cache
+      apt:
+        update_cache: yes
+    - name: upgrade system
+      apt:
+        upgrade: yes

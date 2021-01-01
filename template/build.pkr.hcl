@@ -39,7 +39,7 @@ source vsphere-iso template {
     vcenter_server              = "vc.in.reinitialized.net"
     username                    = var.username
     password                    = var.password
-    insecure_connection         = false # TODO: automate SSL renewal
+    insecure_connection         = true # TODO: automate SSL renewal
 
     ## Where to store
     datacenter                  = "reinitialized.net"
@@ -86,7 +86,7 @@ source vsphere-iso template {
 
     ## http for automated installs
     http_directory              = var.http_directory
-    #http_ip                     = "172.16.0.2"
+    http_ip                     = "172.16.0.2"
 
     ## floppy for ubuntu (since its broken)
     floppy_label                = var.floppy_label
